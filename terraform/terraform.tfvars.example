@@ -1,0 +1,6 @@
+project_id = "spike-cloud-run"
+project_name = "spike-cloud-run"
+region = "asia-northeast1"
+database_name = "spike_db"
+database_user = "postgres"
+database_password = "your-secure-password"

@@ -1,0 +1,43 @@
+{
+  "name": "spike-cloud-run",
+  "version": "1.0.0",
+  "description": "Cloud Run + Cloud SQL with Hono + Drizzle sample",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/migrate.ts",
+    "db:studio": "drizzle-kit studio",
+    "format": "prettier --write .",
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "keywords": ["hono", "drizzle", "cloud-run", "cloud-sql"],
+  "author": "hiroyannnn",
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^4.3.11",
+    "drizzle-orm": "^0.30.10",
+    "postgres": "^3.4.4",
+    "@hono/node-server": "^1.11.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5",
+    "tsx": "^4.15.2",
+    "drizzle-kit": "^0.21.4",
+    "prettier": "^3.3.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+# Migration用のDockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Install tsx for TypeScript execution
+RUN npm install tsx
+
+# Copy source code and migration files
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+COPY drizzle.config.ts ./
+
+# Run migration
+CMD ["npx", "tsx", "scripts/migrate-production.ts"]

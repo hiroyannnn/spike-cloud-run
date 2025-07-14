@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: spike-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: spike_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  app:
+    build: .
+    container_name: spike-app
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/spike_db
+      NODE_ENV: development
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./tsconfig.json:/app/tsconfig.json
+    command: npm run dev
+
+  adminer:
+    image: adminer:latest
+    container_name: spike-adminer
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
