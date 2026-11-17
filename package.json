@@ -11,7 +11,7 @@
     "db:migrate": "tsx src/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "format": "prettier --write .",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src",
     "test": "jest"
   },
   "keywords": ["hono", "drizzle", "cloud-run", "cloud-sql"],
